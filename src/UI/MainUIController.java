@@ -46,6 +46,7 @@ public class MainUIController implements Initializable {
     @FXML private TableColumn<Data, String> ward;
     @FXML private TableColumn<Data, Double> latitude;
     @FXML private TableColumn<Data, Double> longitude;
+    @FXML private TableColumn<Data, Button> mapButtonCol;
     
     @FXML private TextField inputAccount;
     @FXML private TextField inputAddress;
@@ -86,6 +87,7 @@ public class MainUIController implements Initializable {
         ward.setCellValueFactory(new PropertyValueFactory<>("ward"));
         latitude.setCellValueFactory(new PropertyValueFactory<>("latitude"));
         longitude.setCellValueFactory(new PropertyValueFactory<>("longitude"));
+        mapButtonCol.setCellValueFactory(new PropertyValueFactory<>("button"));
 
         showStats(masterData);
         tableAssessment.setItems(listData);
