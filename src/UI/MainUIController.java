@@ -58,6 +58,8 @@ public class MainUIController implements Initializable {
     @FXML private Button btnReset;
     @FXML private TextArea statText;
     
+    // remote data files
+    
     public List<Data> masterData = new ArrayList<>(newSearcher.getAllAccounts());
     public Map<Integer, Data> map = new HashMap<>(newSearcher.getAllAccountsM());
     public ObservableList<Data> listData = FXCollections.observableArrayList(masterData);
