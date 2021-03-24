@@ -2,7 +2,7 @@ package Data;
 
 import java.text.NumberFormat;
 import java.util.Locale;
-
+//mario
 /**
  * Creates Data object and stores information from csv line.
  * @author ryley
