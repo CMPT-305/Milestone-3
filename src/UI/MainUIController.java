@@ -47,6 +47,8 @@ public class MainUIController implements Initializable {
     @FXML private TableColumn<Data, Double> latitude;
     @FXML private TableColumn<Data, Double> longitude;
     
+    // spicy beans
+    
     @FXML private TextField inputAccount;
     @FXML private TextField inputAddress;
     @FXML private TextField inputNeighbourhood;
