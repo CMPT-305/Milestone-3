@@ -1,7 +1,6 @@
 package Data;
 
-import java.text.NumberFormat;
-import java.util.Locale;
+import javafx.scene.control.Button;
 //mario
 /**
  * Creates Data object and stores information from csv line.
@@ -21,6 +20,7 @@ public class Data {
     private double longitude;
     private double[] assessmentPercentage;
     private String[] assessmentClass;
+    private Button button;
     
     /**
      * Constructor method - Data
@@ -41,6 +41,7 @@ public class Data {
         assessedValue = Double.parseDouble(token[8]);
         latitude = Double.parseDouble(token[9]);
         longitude = Double.parseDouble(token[10]);
+        button = new Button("Search");
         
         assessmentPercentage = new double[3];
         for(int j=0; j<3; j++) {
@@ -73,6 +74,7 @@ public class Data {
         assessedValue = clone.assessedValue;
         latitude = clone.latitude;
         longitude = clone.longitude;
+        button = clone.button;
         
         assessmentPercentage = new double[3];
         for(int j=0;j<3;j++) {
@@ -456,5 +458,13 @@ public class Data {
     public String assessedValue() {
         int value = (int) assessedValue;
         return "$"+String.format("%,2d", value);
+    }
+    
+    public Button getButton() {
+        return button;
+    }
+    
+    public void setButton(Button button) {
+        this.button = button;
     }
 }
