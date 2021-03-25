@@ -172,6 +172,9 @@ public class MainUIController implements Initializable {
         tableAssessment.setItems(listData);
     }
 
+    
+   
+    
     /**
      * showStats - takes a data list and prints out the statistics.
      * @param data
