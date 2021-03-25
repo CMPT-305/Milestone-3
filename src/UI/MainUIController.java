@@ -47,8 +47,6 @@ public class MainUIController implements Initializable {
     @FXML private TableColumn<Data, Double> latitude;
     @FXML private TableColumn<Data, Double> longitude;
     
-    // spicy beans
-    
     @FXML private TextField inputAccount;
     @FXML private TextField inputAddress;
     @FXML private TextField inputNeighbourhood;
@@ -57,8 +55,6 @@ public class MainUIController implements Initializable {
     @FXML private Button btnSearch;
     @FXML private Button btnReset;
     @FXML private TextArea statText;
-    
-    // remote data files
     
     public List<Data> masterData = new ArrayList<>(newSearcher.getAllAccounts());
     public Map<Integer, Data> map = new HashMap<>(newSearcher.getAllAccountsM());
