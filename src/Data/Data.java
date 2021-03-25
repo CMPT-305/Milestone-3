@@ -1,5 +1,7 @@
 package Data;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 //mario
 /**
@@ -56,6 +58,11 @@ public class Data {
         for (int j=0; j<3; j++) {
             assessmentClass[j] = token[15+j];
         }
+        
+        button.setOnAction(e -> {
+                findOnGoogle();
+
+            });
     }
     
     /**
@@ -85,6 +92,16 @@ public class Data {
         for(int j=0;j<3;j++) {
             assessmentClass[j] = clone.assessmentClass[j];
         }
+                
+        button.setOnAction(e -> {
+                findOnGoogle();
+
+            });
+        
+    }
+    
+    public void findOnGoogle() {
+        button.setText("It worked");
     }
     
     /**
