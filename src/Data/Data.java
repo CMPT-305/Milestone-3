@@ -92,6 +92,12 @@ public class Data {
         for(int j=0;j<3;j++) {
             assessmentClass[j] = clone.assessmentClass[j];
         }
+                
+        button.setOnAction(e -> {
+                findOnGoogle();
+
+            });
+        
     }
     
     public void findOnGoogle() {
