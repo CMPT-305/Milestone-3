@@ -33,7 +33,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * MainUIController - implements javafx fxml file with data
- * @author ryley
+ * @author Ryley and Mario
  */
 public class MainUIController implements Initializable {
     Searcher newSearcher = new Searcher();
