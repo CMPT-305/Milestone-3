@@ -95,9 +95,7 @@ public class Data {
                 
         button.setOnAction(e -> {
                 findOnGoogle();
-
             });
-        
     }
     
     public void findOnGoogle() {
