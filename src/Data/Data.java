@@ -1,12 +1,14 @@
 package Data;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import javafx.scene.control.Hyperlink;
 //mario
 /**
  * Creates Data object and stores information from csv line.
- * @author ryley
+ * @author Ryley and Mario
  */
 public class Data {
     private int accountNumber;
@@ -22,7 +24,7 @@ public class Data {
     private double longitude;
     private double[] assessmentPercentage;
     private String[] assessmentClass;
-    private Button button;
+    private Hyperlink hyperlink;
     
     /**
      * Constructor method - Data
@@ -43,7 +45,6 @@ public class Data {
         assessedValue = Double.parseDouble(token[8]);
         latitude = Double.parseDouble(token[9]);
         longitude = Double.parseDouble(token[10]);
-        button = new Button("Search");
         
         assessmentPercentage = new double[3];
         for(int j=0; j<3; j++) {
@@ -59,11 +60,22 @@ public class Data {
             assessmentClass[j] = token[15+j];
         }
         
-        button.setOnAction(e -> {
-                findOnGoogle();
-
-            });
-    }
+        hyperlink = new Hyperlink("Click Me");
+        //Setting link to Google maps location
+        hyperlink.setOnAction(e -> {
+            if(Desktop.isDesktopSupported()) {
+                try {
+                    String url;
+                    //Map location url
+                    url = String.format("http://maps.google.com/maps?q=%s,%s&z=17",latitude,longitude);
+                    Desktop.getDesktop().browse(new URI(url));
+                } catch (IOException | URISyntaxException e1) {
+                    System.out.println("unable to connect");
+                }
+            }
+        });
+        
+        }
     
     /**
      * Constructor method - clones the Data object
@@ -81,7 +93,6 @@ public class Data {
         assessedValue = clone.assessedValue;
         latitude = clone.latitude;
         longitude = clone.longitude;
-        button = clone.button;
         
         assessmentPercentage = new double[3];
         for(int j=0;j<3;j++) {
@@ -92,14 +103,8 @@ public class Data {
         for(int j=0;j<3;j++) {
             assessmentClass[j] = clone.assessmentClass[j];
         }
-                
-        button.setOnAction(e -> {
-                findOnGoogle();
-            });
-    }
-    
-    public void findOnGoogle() {
-        button.setText("It worked");
+        
+        hyperlink = clone.hyperlink;
     }
     
     /**
@@ -475,11 +480,11 @@ public class Data {
         return "$"+String.format("%,2d", value);
     }
     
-    public Button getButton() {
-        return button;
+    public Hyperlink getHyperlink() {
+        return hyperlink;
     }
     
-    public void setButton(Button button) {
-        this.button = button;
+    public void setButton(Hyperlink hyperlink) {
+        this.hyperlink = hyperlink;
     }
 }

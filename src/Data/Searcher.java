@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * Creates the Data object list and populates it from a csv file
@@ -446,11 +448,11 @@ public class Searcher {
     
     /**
      * showWard - store all ward values from data into a new set containing distinct
-     * unique ward values
+     * unique ward values, and is ordered
      * @return unique - String Set
      */
     public Set<String> showWard() {
-        Set<String> unique = new HashSet<>();
+        Set<String> unique = new TreeSet<>(new WardComparator());
         for(Data entry:data) {
             unique.add(entry.getWard());
         }
@@ -608,4 +610,33 @@ public class Searcher {
         }
         return oList;
     }
+    
+    /**
+     * getSortedMap - should only be called once.
+     * creates a nested Map, Map, List grouping ward values with neighbourhood values
+     * with double Array list for the assessed values of individual propertys
+     * @return 
+     */
+    public Map<String, Map<String, List<Double>>> getSortedMapByWard() {
+        Map<String, Map<String, List<Double>>> wardData = new TreeMap<>(new WardComparator());
+        // instantiate wards and add them into map
+        Set<String> wardName = showWard();
+        for (String str: wardName) {
+            wardData.put(str, new TreeMap<String, List<Double>>());
+        }
+        // populate the individual wards of each neighbourhood
+        for (Data entry: data) {
+            if (wardData.get(entry.getWard()) == null) {
+            } else {
+                if (wardData.get(entry.getWard()).get(entry.getNeighbourhood()) == null) {
+                    wardData.get(entry.getWard()).put(entry.getNeighbourhood(), new ArrayList<Double>());
+                    wardData.get(entry.getWard()).get(entry.getNeighbourhood()).add(entry.getAssessedValueDouble());
+                } else {
+                    wardData.get(entry.getWard()).get(entry.getNeighbourhood()).add(entry.getAssessedValueDouble());
+                }
+            }
+        }
+        return wardData;
+    }
+    
 }

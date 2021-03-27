@@ -25,6 +25,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -46,7 +47,7 @@ public class MainUIController implements Initializable {
     @FXML private TableColumn<Data, String> ward;
     @FXML private TableColumn<Data, Double> latitude;
     @FXML private TableColumn<Data, Double> longitude;
-    @FXML private TableColumn<Data, Button> mapButtonCol;
+    @FXML private TableColumn<Data, Hyperlink> mapButtonCol;
     
     @FXML private TextField inputAccount;
     @FXML private TextField inputAddress;
@@ -87,7 +88,7 @@ public class MainUIController implements Initializable {
         ward.setCellValueFactory(new PropertyValueFactory<>("ward"));
         latitude.setCellValueFactory(new PropertyValueFactory<>("latitude"));
         longitude.setCellValueFactory(new PropertyValueFactory<>("longitude"));
-        mapButtonCol.setCellValueFactory(new PropertyValueFactory<>("button"));
+        mapButtonCol.setCellValueFactory(new PropertyValueFactory<>("hyperlink"));
 
         showStats(masterData);
         tableAssessment.setItems(listData);
