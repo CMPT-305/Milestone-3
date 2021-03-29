@@ -45,7 +45,6 @@ public class Data {
         assessedValue = Double.parseDouble(token[8]);
         latitude = Double.parseDouble(token[9]);
         longitude = Double.parseDouble(token[10]);
-        hyperlink = new Hyperlink("Click Me");
         
         assessmentPercentage = new double[3];
         for(int j=0; j<3; j++) {
@@ -61,24 +60,22 @@ public class Data {
             assessmentClass[j] = token[15+j];
         }
         
+        hyperlink = new Hyperlink("Click Me");
         //Setting link to Google maps location
         hyperlink.setOnAction(e -> {
-            if(Desktop.isDesktopSupported())
-            {
+            if(Desktop.isDesktopSupported()) {
                 try {
                     String url;
                     //Map location url
                     url = String.format("http://maps.google.com/maps?q=%s,%s&z=17",latitude,longitude);
                     Desktop.getDesktop().browse(new URI(url));
-                } 
-                
-                catch (IOException | URISyntaxException e1) {
+                } catch (IOException | URISyntaxException e1) {
+                    System.out.println("unable to connect");
                 }
             }
         });
+        
         }
-
-
     
     /**
      * Constructor method - clones the Data object
@@ -96,7 +93,6 @@ public class Data {
         assessedValue = clone.assessedValue;
         latitude = clone.latitude;
         longitude = clone.longitude;
-        hyperlink = clone.hyperlink;
         
         assessmentPercentage = new double[3];
         for(int j=0;j<3;j++) {
@@ -107,9 +103,8 @@ public class Data {
         for(int j=0;j<3;j++) {
             assessmentClass[j] = clone.assessmentClass[j];
         }
-                
-      
         
+        hyperlink = clone.hyperlink;
     }
     
     /**
