@@ -5,11 +5,9 @@
  */
 package Data;
 
-
-
 /**
  *
- * @author Mario
+ * @author Mario and Ryan
  */
 public class CensusData {
     private final String ward;
@@ -25,8 +23,8 @@ public class CensusData {
     private final Integer noResponse;
     
     /**
-     * Constructor method - Data
-     * Takes a string line from a csv file and populates information as new Data object
+     * Constructor method - CensusData
+     * Takes a string line from a csv file and populates information as new CensusData object
      * @param csv 
      */
     public CensusData (String csv) {
@@ -34,6 +32,7 @@ public class CensusData {
         
         ward = token [0];
         neighbourhood = token[2];
+        //Variables for the amount of people with the following income
         lessThan30k = Integer.parseInt(token[3]);
         over30kBelow60k = Integer.parseInt(token[4]);
         over60kBelow100k = Integer.parseInt(token[5]);
@@ -60,69 +59,120 @@ public class CensusData {
         noResponse = clone.noResponse;
     }
 
+     /**
+     * 
+     * @return ward
+     */
     public String getWard() {
         String wardClone = ward;
         return wardClone;
     }
-
+    
+    /**
+     * 
+     * @return neighbourhood
+     */
     public String getNeighbourhood() {
         String neighbourhoodClone = neighbourhood;
         return neighbourhoodClone;
     }
 
+    /**
+     * 
+     * @return population making Less than 30k
+     */
     public Integer getLessThan30k() {
         Integer lessThan30kClone = lessThan30k;
         return lessThan30kClone;
     }
 
+    /**
+     * 
+     * @return population over 30k and below 60k
+     */
     public Integer getOver30kBelow60k() {
         Integer over30kBelow60kClone = over30kBelow60k;
         return over30kBelow60kClone;
     }
 
+    /**
+     * 
+     * @return population making over 60k and below 100k
+     */
     public Integer getOver60kBelow100k() {
         Integer over60kBelow100kClone = over60kBelow100k;
         return over60kBelow100kClone;
     }
 
+    /**
+     * 
+     * @return population making over 100k and below 125k
+     */
     public Integer getOver100kBelow125k() {
         Integer over100kBelow125kClone = over100kBelow125k;
         return over100kBelow125kClone;
     }
 
+    /**
+     * 
+     * @return population making over 125k and below 150k
+     */
     public Integer getOver125kBelow150k() {
         Integer over125kBelow150kClone = over125kBelow150k;
         return over125kBelow150kClone;
     }
 
+    /**
+     * 
+     * @return population making over 150k and below 200k
+     */
     public Integer getOver150kBelow200k() {
         Integer over150kBelow200kClone = over150kBelow200k;
         return over150kBelow200kClone;
     }
 
+    /**
+     * 
+     * @return population making over 200k and below 250k
+     */
     public Integer getOver200kBelow250k() {
         Integer over200kBelow250kClone = over200kBelow250k;
         return over200kBelow250kClone;
     }
 
+    /**
+     * 
+     * @return population making over 250k
+     */
     public Integer getOver250kOrMore() {
         Integer over250kOrMoreClone = over250kOrMore;
         return over250kOrMoreClone;
     }
 
+    /**
+     * 
+     * @return population that didn't respond to the census
+     */
     public Integer getNoResponse() {
         Integer noResponseClone = noResponse;
         return noResponseClone;
     }
     
     
-        /**
+     /**
      * equalsStreetName - checks input and returns true if it matches
-     * streetName. Otherwise false
+     * ward. Otherwise false
      * @param o
      * @return true/false
      */
     public boolean equalsWard(String o) {return ward.equalsIgnoreCase(o);}
+    
+     /**
+     * equalsStreetName - checks input and returns true if it matches
+     * neighbourhood. Otherwise false
+     * @param o
+     * @return true/false
+     */
     public boolean equalsNeighbourhood(String o) {return neighbourhood.equalsIgnoreCase(o);}
         
     

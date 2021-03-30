@@ -612,6 +612,10 @@ public class Searcher {
         return account;
     }
     
+     /**
+     * getAllNeighbourhoods - gets all neighbourhood data from census csv file regarding household income
+     * @return neighbourhood - CensusData List
+     */
         public List<CensusData> getAllNeighbourhoods() {
         List<CensusData> neighbourhood = new ArrayList<>();
         for (CensusData entry:censusData) {
