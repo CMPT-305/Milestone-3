@@ -1,5 +1,6 @@
 package UI;
 
+import Data.CensusData;
 import Data.Data;
 import Data.FilterAccount;
 import Data.FilterAddress;
@@ -59,6 +60,7 @@ public class MainUIController implements Initializable {
     @FXML private TextArea statText;
     
     public List<Data> masterData = new ArrayList<>(newSearcher.getAllAccounts());
+    public List<CensusData> censusData = new ArrayList<>(newSearcher.getAllNeighbourhoods());
     public Map<Integer, Data> map = new HashMap<>(newSearcher.getAllAccountsM());
     public ObservableList<Data> listData = FXCollections.observableArrayList(masterData);
     

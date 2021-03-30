@@ -18,8 +18,10 @@ import java.util.TreeSet;
  */
 public class Searcher {
     private List<Data> data;
+    private List<CensusData> censusData;
     // private String FILENAME = "Test_Data.csv";
     private String FILENAME = "Property_Assessment_Data.csv";
+    private String censusFile = "2016_Census_-_Population_by_Household_Income__Neighbourhood_Ward_.csv";
     
     /**
      * Searcher - takes string filename and creates Data object
@@ -35,6 +37,21 @@ public class Searcher {
                     first=false;
                 } else {
                     data.add(new Data(line));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot read data from file: "+filename);
+        }
+        
+        try (Scanner sc = new Scanner(new File(filename))) {
+            censusData = new ArrayList<>();
+            boolean first = true;
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                if (first) {
+                    first=false;
+                } else {
+                    censusData.add(new CensusData(line));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -61,6 +78,23 @@ public class Searcher {
         } catch (FileNotFoundException e) {
             System.out.println("Can't read the file.");
         }
+        
+        try (Scanner sc = new Scanner(new File(censusFile))) {
+            censusData = new ArrayList<>();
+            boolean first = true;
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                if (first) {
+                    first=false;
+                } else {
+                    censusData.add(new CensusData(line));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Can't read the file.");
+        }
+        
+        
     }
     
     //==========================================================================
@@ -576,6 +610,14 @@ public class Searcher {
             account.add(new Data(entry));
         }
         return account;
+    }
+    
+        public List<CensusData> getAllNeighbourhoods() {
+        List<CensusData> neighbourhood = new ArrayList<>();
+        for (CensusData entry:censusData) {
+            neighbourhood.add(new CensusData(entry));
+        }
+        return neighbourhood;
     }
     
     /**
