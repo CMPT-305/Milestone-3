@@ -9,6 +9,7 @@ import Data.FilterWard;
 import Data.FindAccount;
 import Data.Searcher;
 import Data.Statistics;
+import static Data.Statistics.mean;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,14 +19,22 @@ import java.util.Map;
 import static java.util.Objects.isNull;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -38,6 +47,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class MainUIController implements Initializable {
     Searcher newSearcher = new Searcher();
+    
+    @FXML private BarChart<String, Number> barChart;
+    @FXML private Label graphName;
+    
     @FXML private TableView<Data> tableAssessment;
     @FXML private TableColumn<Data, Integer> accountNumber;
     @FXML private TableColumn<Data, String> address;
@@ -49,6 +62,7 @@ public class MainUIController implements Initializable {
     @FXML private TableColumn<Data, Double> longitude;
     @FXML private TableColumn<Data, Hyperlink> mapButtonCol;
     
+    // tab 1
     @FXML private TextField inputAccount;
     @FXML private TextField inputAddress;
     @FXML private TextField inputNeighbourhood;
@@ -56,12 +70,19 @@ public class MainUIController implements Initializable {
     @FXML private ChoiceBox<String> inputWard;
     @FXML private Button btnSearch;
     @FXML private Button btnReset;
+    @FXML private Button btnSearchT2;
+    @FXML private Button btnResetT2;
     @FXML private TextArea statText;
+    
+    // tab 2
+    @FXML private ChoiceBox<String> selectWard;
     
     public List<Data> masterData = new ArrayList<>(newSearcher.getAllAccounts());
     public Map<Integer, Data> map = new HashMap<>(newSearcher.getAllAccountsM());
+    public Map<String, Map<String, List<Double>>> graphicMap = new TreeMap<>(newSearcher.getSortedMapByWard());
     public ObservableList<Data> listData = FXCollections.observableArrayList(masterData);
     
+    final static String performance = "Performance:";
     /**
      * initialize - initializes the tableAssessment for FXML
      * create
@@ -71,9 +92,13 @@ public class MainUIController implements Initializable {
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // ward button search
+        // ward button search tab1
         inputWard.getItems().removeAll(inputWard.getItems());
         inputWard.getItems().addAll(newSearcher.showWard());
+        
+        // ward button search tab2
+        selectWard.getItems().removeAll(selectWard.getItems());
+        selectWard.getItems().addAll(newSearcher.showWard());
         
         // assessment class button search
         inputAssessmentClass.getItems().removeAll(inputAssessmentClass.getItems());
@@ -89,7 +114,7 @@ public class MainUIController implements Initializable {
         latitude.setCellValueFactory(new PropertyValueFactory<>("latitude"));
         longitude.setCellValueFactory(new PropertyValueFactory<>("longitude"));
         mapButtonCol.setCellValueFactory(new PropertyValueFactory<>("hyperlink"));
-
+        
         showStats(masterData);
         tableAssessment.setItems(listData);
     }
@@ -172,10 +197,36 @@ public class MainUIController implements Initializable {
         showStats(masterData);
         tableAssessment.setItems(listData);
     }
-
     
-   
+    /**
+     * graphicSearch - updates the graphic information from selection search
+     * @param event 
+     */
+    @FXML
+    void graphicSearch(ActionEvent event) {
+        XYChart.Series <String, Number> series = new XYChart.Series();
+        
+        String tempWard = selectWard.getValue();
+        Set<String> wardSet = new TreeSet<>(graphicMap.get(tempWard).keySet());
+        for (String str: wardSet) {
+            Double average = mean(graphicMap.get(tempWard).get(str));
+            series.getData().add(new XYChart.Data(str, average));
+        }
+        series.setName(tempWard);
+        graphName.setText(tempWard);
+        barChart.getData().setAll(series);
+    }
     
+    /**
+     * graphicReset - resets the graphic
+     * @param event 
+     */
+    @FXML
+    void graphicReset(ActionEvent event) {
+        selectWard.setValue("");
+        graphName.setText("");
+        barChart.getData().setAll();
+    }
     /**
      * showStats - takes a data list and prints out the statistics.
      * @param data
