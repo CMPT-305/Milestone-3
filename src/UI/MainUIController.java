@@ -80,6 +80,11 @@ public class MainUIController implements Initializable {
     @FXML private ChoiceBox<String> selectWard;
     @FXML private TextArea wardGraphic;
     
+    //tab 3
+    @FXML private ChoiceBox<String> selectWard2;
+    @FXML private TextArea wardGraphic2;
+    
+    
     public List<Data> masterData = new ArrayList<>(newSearcher.getAllAccounts());
     public List<CensusData> censusData = new ArrayList<>(newSearcher.getAllNeighbourhoods());
     public Map<Integer, Data> map = new HashMap<>(newSearcher.getAllAccountsM());
@@ -214,6 +219,7 @@ public class MainUIController implements Initializable {
         stringBuilder.append(tempWard+"\n"+"-------------------------------\n");
         
         Set<String> wardSet = new TreeSet<>(graphicMap.get(tempWard).keySet());
+        //str is neighbourhood name
         for (String str: wardSet) {
             if (str.equals("")) {
                 // skips over empty fields
@@ -252,6 +258,25 @@ public class MainUIController implements Initializable {
             statText.setText("");
         }
     }
+    
+     /**
+     * graphicSearch - updates the census graphic information from selection search
+     * @param event 
+     */
+    @FXML
+    void graphicSearch2(ActionEvent event) {
+    }
+    
+    /**
+     * graphicReset - resets the census graphic
+     * @param event 
+     */
+    @FXML
+    void graphicReset2(ActionEvent event) {
+    }
+    
+    
+    
 
     /**
      * getAssessedValue - takes an ArrayList data and takes the assessed values
