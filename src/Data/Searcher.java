@@ -1,6 +1,7 @@
 package Data;
 
 import java.io.*;
+import static java.lang.System.exit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -685,5 +686,44 @@ public class Searcher {
         return wardData;
     }
     
-    
+        public Map<String,WardIncome> getPopulationByWard() {
+            List<String> wards = new ArrayList<>();
+            Map<String,WardIncome> wardData = new HashMap<>();
+            for (int i=1;i<13;i++){
+                wards.add("WARD "+i);
+                wardData.put("WARD "+i,new WardIncome());
+            }
+            
+            for (CensusData entry: censusData){
+                if (wardData.containsKey(entry.getWard())) {
+                    //wardData.get(entry.getWard()).add(entry;
+                    wardData.get(entry.getWard()).addToLessThan30k(entry.getLessThan30k());
+                    wardData.get(entry.getWard()).addToOver30kBelow60k(entry.getOver30kBelow60k());
+                    wardData.get(entry.getWard()).addToOver60kBelow100k(entry.getOver60kBelow100k());
+                    wardData.get(entry.getWard()).addToOver100kBelow125k(entry.getOver100kBelow125k());
+                    wardData.get(entry.getWard()).addToOver125kBelow150k(entry.getOver125kBelow150k());
+                    wardData.get(entry.getWard()).addToOver150kBelow200k(entry.getOver150kBelow200k());
+                    wardData.get(entry.getWard()).addToOver200kBelow250k(entry.getOver200kBelow250k());
+                    wardData.get(entry.getWard()).addToOver250kOrMore(entry.getOver250kOrMore());
+                    wardData.get(entry.getWard()).addToNoResponse(entry.getNoResponse());
+                }
+            }
+            
+            
+            for (int i=1;i<13;i++){
+                System.out.println("WARD "+i+" INCOME BY POP");
+                System.out.println(wardData.get("WARD "+i).getLessThan30k());
+                System.out.println(wardData.get("WARD "+i).getLessThan30k());
+                System.out.println(wardData.get("WARD "+i).getOver60kBelow100k());
+                System.out.println(wardData.get("WARD "+i).getOver100kBelow125k());
+                System.out.println(wardData.get("WARD "+i).getOver125kBelow150k());
+                System.out.println(wardData.get("WARD "+i).getOver150kBelow200k());
+                System.out.println(wardData.get("WARD "+i).getOver200kBelow250k());
+                System.out.println(wardData.get("WARD "+i).getOver250kOrMore());
+                System.out.println(wardData.get("WARD "+i).getNoResponse());
+            }
+            //System.out.println(wardData.get("WARD 1").getLessThan30k());
+        return wardData;
+
+        }
 }

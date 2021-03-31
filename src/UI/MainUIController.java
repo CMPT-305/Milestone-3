@@ -11,6 +11,7 @@ import Data.FindAccount;
 import Data.Searcher;
 import Data.Statistics;
 import static Data.Statistics.mean;
+import Data.WardIncome;
 import java.awt.Font;
 import java.net.URL;
 import java.util.ArrayList;
@@ -86,10 +87,10 @@ public class MainUIController implements Initializable {
     
     
     public List<Data> masterData = new ArrayList<>(newSearcher.getAllAccounts());
-    public List<CensusData> censusData = new ArrayList<>(newSearcher.getAllNeighbourhoods());
     public Map<Integer, Data> map = new HashMap<>(newSearcher.getAllAccountsM());
     public Map<String, Map<String, List<Double>>> graphicMap = new TreeMap<>(newSearcher.getSortedMapByWard());
     public ObservableList<Data> listData = FXCollections.observableArrayList(masterData);
+    
     
     /**
      * initialize - initializes the tableAssessment for FXML
@@ -100,6 +101,7 @@ public class MainUIController implements Initializable {
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Map<String,WardIncome> x = newSearcher.getPopulationByWard();
         // ward button search tab1
         inputWard.getItems().removeAll(inputWard.getItems());
         inputWard.getItems().addAll(newSearcher.showWard());
