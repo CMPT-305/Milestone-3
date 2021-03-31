@@ -11,6 +11,7 @@ import Data.FindAccount;
 import Data.Searcher;
 import Data.Statistics;
 import static Data.Statistics.mean;
+import java.awt.Font;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,6 +78,7 @@ public class MainUIController implements Initializable {
     
     // tab 2
     @FXML private ChoiceBox<String> selectWard;
+    @FXML private TextArea wardGraphic;
     
     public List<Data> masterData = new ArrayList<>(newSearcher.getAllAccounts());
     public List<CensusData> censusData = new ArrayList<>(newSearcher.getAllNeighbourhoods());
@@ -84,7 +86,6 @@ public class MainUIController implements Initializable {
     public Map<String, Map<String, List<Double>>> graphicMap = new TreeMap<>(newSearcher.getSortedMapByWard());
     public ObservableList<Data> listData = FXCollections.observableArrayList(masterData);
     
-    final static String performance = "Performance:";
     /**
      * initialize - initializes the tableAssessment for FXML
      * create
@@ -207,16 +208,25 @@ public class MainUIController implements Initializable {
     @FXML
     void graphicSearch(ActionEvent event) {
         XYChart.Series <String, Number> series = new XYChart.Series();
+        StringBuilder stringBuilder = new StringBuilder();
         
         String tempWard = selectWard.getValue();
+        stringBuilder.append(tempWard+"\n"+"-------------------------------\n");
+        
         Set<String> wardSet = new TreeSet<>(graphicMap.get(tempWard).keySet());
         for (String str: wardSet) {
-            Double average = mean(graphicMap.get(tempWard).get(str));
-            series.getData().add(new XYChart.Data(str, average));
+            if (str.equals("")) {
+                // skips over empty fields
+            } else {
+                Double average = mean(graphicMap.get(tempWard).get(str));
+                series.getData().add(new XYChart.Data(str, average));
+                stringBuilder.append("\t" + str + ":  $" + String.format("%,.2f", average) + "\n\n");
+            }
         }
         series.setName(tempWard);
         graphName.setText(tempWard);
         barChart.getData().setAll(series);
+        wardGraphic.setText(stringBuilder.toString());
     }
     
     /**
@@ -228,6 +238,7 @@ public class MainUIController implements Initializable {
         selectWard.setValue("");
         graphName.setText("");
         barChart.getData().setAll();
+        wardGraphic.setText("");
     }
     /**
      * showStats - takes a data list and prints out the statistics.

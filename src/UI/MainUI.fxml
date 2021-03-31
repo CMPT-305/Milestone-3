@@ -209,7 +209,7 @@
                           <content>
                             <AnchorPane focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="664.0" prefWidth="1610.0">
                                  <children>
-                                    <BarChart fx:id="barChart" alternativeColumnFillVisible="true" animated="false" focusTraversable="true" legendSide="RIGHT" legendVisible="false" pickOnBounds="false" prefHeight="714.0" prefWidth="3000.0" scaleShape="false">
+                                    <BarChart fx:id="barChart" alternativeColumnFillVisible="true" animated="false" focusTraversable="true" legendSide="RIGHT" legendVisible="false" pickOnBounds="false" prefHeight="1000.0" prefWidth="3000.0">
                                       <xAxis>
                                         <CategoryAxis animated="false" focusTraversable="true" prefHeight="24.0" prefWidth="1146.0" />
                                       </xAxis>
@@ -227,6 +227,7 @@
                               </AnchorPane>
                           </content>
                         </ScrollPane>
+                        <TextArea fx:id="wardGraphic" editable="false" prefHeight="200.0" prefWidth="200.0" scrollLeft="50.0" scrollTop="50.0" GridPane.columnSpan="3" GridPane.rowIndex="5" GridPane.rowSpan="15" />
                      </children>
                   </GridPane>
                </content>
