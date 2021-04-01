@@ -277,9 +277,6 @@ public class MainUIController implements Initializable {
     void graphicReset2(ActionEvent event) {
     }
     
-    
-    
-
     /**
      * getAssessedValue - takes an ArrayList data and takes the assessed values
      * and stores them into a double list
