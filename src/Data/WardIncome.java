@@ -20,6 +20,7 @@ public class WardIncome {
     private Integer over250kOrMore;
     private Integer noResponse;
     
+    
     public WardIncome () {
         this.lessThan30k = 0;
         this.over30kBelow60k = 0;
@@ -39,6 +40,7 @@ public class WardIncome {
     public Integer getOver30kBelow60k() {
         return over30kBelow60k;
     }
+
 
     public Integer getOver60kBelow100k() {
         return over60kBelow100k;

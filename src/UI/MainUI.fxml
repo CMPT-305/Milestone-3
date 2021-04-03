@@ -290,20 +290,20 @@
                      </opaqueInsets>
                      <children>
                         <ChoiceBox fx:id="selectWard2" prefHeight="22.0" prefWidth="385.0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-                        <Button fx:id="btnSearchT3" defaultButton="true" mnemonicParsing="false" onAction="#graphicSearch" prefHeight="22.0" prefWidth="122.0" text="Search" GridPane.rowIndex="4" />
-                        <Button fx:id="btnResetT3" defaultButton="true" mnemonicParsing="false" onAction="#graphicReset" prefHeight="22.0" prefWidth="193.0" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label prefHeight="17.0" prefWidth="255.0" text="Show Assessment Data by Ward" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+                        <Button fx:id="btnSearchT3" defaultButton="true" mnemonicParsing="false" onAction="#graphicSearch2" prefHeight="22.0" prefWidth="122.0" text="Search" GridPane.rowIndex="4" />
+                        <Button fx:id="btnResetT3" defaultButton="true" mnemonicParsing="false" onAction="#graphicReset2" prefHeight="22.0" prefWidth="193.0" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label prefHeight="17.0" prefWidth="255.0" text="Show Population by Income (Census 2016)" GridPane.columnSpan="4" GridPane.rowIndex="2" />
                         <Label fx:id="graphName2" prefHeight="17.0" prefWidth="624.0" GridPane.columnIndex="3" GridPane.columnSpan="3" />
                         <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="154.0" prefWidth="194.0" GridPane.columnIndex="3" GridPane.columnSpan="8" GridPane.rowIndex="1" GridPane.rowSpan="18">
                            <content>
                               <AnchorPane focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="664.0" prefWidth="1610.0">
                                  <children>
-                                    <BarChart fx:id="barChart2" alternativeColumnFillVisible="true" animated="false" focusTraversable="true" layoutX="-5.0" layoutY="-6.0" legendSide="RIGHT" legendVisible="false" pickOnBounds="false" prefHeight="461.0" prefWidth="3016.0">
+                                    <BarChart fx:id="barChart2" alternativeColumnFillVisible="true" animated="false" categoryGap="5.0" focusTraversable="true" layoutX="-5.0" layoutY="-6.0" legendSide="RIGHT" legendVisible="false" pickOnBounds="false" prefHeight="461.0" prefWidth="3016.0">
                                        <xAxis>
-                                          <CategoryAxis animated="false" focusTraversable="true" prefHeight="24.0" prefWidth="1146.0" />
+                                          <CategoryAxis animated="false" focusTraversable="true" label="Income" prefHeight="58.0" prefWidth="2894.0" />
                                        </xAxis>
                                        <yAxis>
-                                          <NumberAxis animated="false" prefHeight="554.0" prefWidth="30.0" side="LEFT" />
+                                          <NumberAxis animated="false" label="Population" prefHeight="383.0" prefWidth="76.0" side="LEFT" />
                                        </yAxis>
                                        <padding>
                                           <Insets left="25.0" right="25.0" />
