@@ -1,6 +1,7 @@
 package Data;
 
 import java.io.*;
+import static java.lang.System.exit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,8 +19,10 @@ import java.util.TreeSet;
  */
 public class Searcher {
     private List<Data> data;
+    private List<CensusData> censusData;
     // private String FILENAME = "Test_Data.csv";
     private String FILENAME = "Property_Assessment_Data.csv";
+    private String censusFile = "2016_Census_-_Population_by_Household_Income__Neighbourhood_Ward_.csv";
     
     /**
      * Searcher - takes string filename and creates Data object
@@ -35,6 +38,21 @@ public class Searcher {
                     first=false;
                 } else {
                     data.add(new Data(line));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot read data from file: "+filename);
+        }
+        
+        try (Scanner sc = new Scanner(new File(filename))) {
+            censusData = new ArrayList<>();
+            boolean first = true;
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                if (first) {
+                    first=false;
+                } else {
+                    censusData.add(new CensusData(line));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -61,6 +79,23 @@ public class Searcher {
         } catch (FileNotFoundException e) {
             System.out.println("Can't read the file.");
         }
+        
+        try (Scanner sc = new Scanner(new File(censusFile))) {
+            censusData = new ArrayList<>();
+            boolean first = true;
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                if (first) {
+                    first=false;
+                } else {
+                    censusData.add(new CensusData(line));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Can't read the file.");
+        }
+        
+        
     }
     
     //==========================================================================
@@ -578,6 +613,18 @@ public class Searcher {
         return account;
     }
     
+     /**
+     * getAllNeighbourhoods - gets all neighbourhood data from census csv file regarding household income
+     * @return neighbourhood - CensusData List
+     */
+        public List<CensusData> getAllNeighbourhoods() {
+        List<CensusData> neighbourhood = new ArrayList<>();
+        for (CensusData entry:censusData) {
+            neighbourhood.add(new CensusData(entry));
+        }
+        return neighbourhood;
+    }
+    
     /**
      * getAllAccountsM - gets all accounts and converts it into a map
      * @return map object with account number as key and matching data object as value
@@ -639,4 +686,30 @@ public class Searcher {
         return wardData;
     }
     
+        public Map<String,WardIncome> getPopulationByWard() {
+            List<String> wards = new ArrayList<>();
+            Map<String,WardIncome> wardData = new HashMap<>();
+            for (int i=1;i<13;i++){
+                wards.add("WARD "+i);
+                wardData.put("WARD "+i,new WardIncome());
+            }
+            
+            for (CensusData entry: censusData){
+                if (wardData.containsKey(entry.getWard())) {
+                    //wardData.get(entry.getWard()).add(entry;
+                    wardData.get(entry.getWard()).addToLessThan30k(entry.getLessThan30k());
+                    wardData.get(entry.getWard()).addToOver30kBelow60k(entry.getOver30kBelow60k());
+                    wardData.get(entry.getWard()).addToOver60kBelow100k(entry.getOver60kBelow100k());
+                    wardData.get(entry.getWard()).addToOver100kBelow125k(entry.getOver100kBelow125k());
+                    wardData.get(entry.getWard()).addToOver125kBelow150k(entry.getOver125kBelow150k());
+                    wardData.get(entry.getWard()).addToOver150kBelow200k(entry.getOver150kBelow200k());
+                    wardData.get(entry.getWard()).addToOver200kBelow250k(entry.getOver200kBelow250k());
+                    wardData.get(entry.getWard()).addToOver250kOrMore(entry.getOver250kOrMore());
+                    wardData.get(entry.getWard()).addToNoResponse(entry.getNoResponse());
+                }
+            }
+            //System.out.println(wardData.get("WARD 1").getLessThan30k());
+        return wardData;
+
+        }
 }
