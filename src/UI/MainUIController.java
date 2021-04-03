@@ -52,7 +52,9 @@ public class MainUIController implements Initializable {
     Searcher newSearcher = new Searcher();
     
     @FXML private BarChart<String, Number> barChart;
+    @FXML private BarChart<String, Number> barChart2;
     @FXML private Label graphName;
+    @FXML private Label graphName2;
     
     @FXML private TableView<Data> tableAssessment;
     @FXML private TableColumn<Data, Integer> accountNumber;
@@ -87,9 +89,11 @@ public class MainUIController implements Initializable {
     
     
     public List<Data> masterData = new ArrayList<>(newSearcher.getAllAccounts());
+    Map<String,WardIncome> censusData = newSearcher.getPopulationByWard();
     public Map<Integer, Data> map = new HashMap<>(newSearcher.getAllAccountsM());
     public Map<String, Map<String, List<Double>>> graphicMap = new TreeMap<>(newSearcher.getSortedMapByWard());
     public ObservableList<Data> listData = FXCollections.observableArrayList(masterData);
+    private String[] categories = {"Less than $30,000","$30,000 to less than $60,000","$60,000 to less than $100,000","$100,000 to less than $125,000","$125,000 to less than $150,000","$150,000 to less than $200,000","$200,000 to less than $250,000","$250,000 or more","No Response"};
     
     
     /**
@@ -101,7 +105,6 @@ public class MainUIController implements Initializable {
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Map<String,WardIncome> x = newSearcher.getPopulationByWard();
         // ward button search tab1
         inputWard.getItems().removeAll(inputWard.getItems());
         inputWard.getItems().addAll(newSearcher.showWard());
@@ -109,6 +112,8 @@ public class MainUIController implements Initializable {
         // ward button search tab2
         selectWard.getItems().removeAll(selectWard.getItems());
         selectWard.getItems().addAll(newSearcher.showWard());
+        selectWard2.getItems().removeAll(selectWard.getItems());
+        selectWard2.getItems().addAll(newSearcher.showWard());
         
         // assessment class button search
         inputAssessmentClass.getItems().removeAll(inputAssessmentClass.getItems());
@@ -262,19 +267,56 @@ public class MainUIController implements Initializable {
     }
     
      /**
-     * graphicSearch - updates the census graphic information from selection search
+     * graphicSearch2 - updates the census graphic information from selection search
      * @param event 
      */
     @FXML
     void graphicSearch2(ActionEvent event) {
+        XYChart.Series <String, Number> series = new XYChart.Series();
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        String tempWard = selectWard2.getValue();
+        stringBuilder.append(tempWard+"\n"+"-------------------------------\n");
+        
+        // Filling up the textbox with ward information
+        WardIncome curWard = censusData.get(tempWard.toUpperCase());
+        stringBuilder.append(categories[0] + ": " + curWard.getLessThan30k()+ "\n\n");
+        stringBuilder.append(categories[2] + ": " + curWard.getOver60kBelow100k()+ "\n\n");
+        stringBuilder.append(categories[3] + ": " + curWard.getOver100kBelow125k()+ "\n\n");
+        stringBuilder.append(categories[4] + ": " + curWard.getOver125kBelow150k()+ "\n\n");
+        stringBuilder.append(categories[5] + ": " + curWard.getOver150kBelow200k()+ "\n\n");
+        stringBuilder.append(categories[6] + ": " + curWard.getOver200kBelow250k()+ "\n\n");
+        stringBuilder.append(categories[7] + ": " + curWard.getOver250kOrMore()+ "\n\n");
+        stringBuilder.append(categories[8] + ": " + curWard.getNoResponse()+ "\n\n");        
+
+        // Filling bar chart with census data
+        series.getData().add(new XYChart.Data(categories[0], curWard.getLessThan30k()));
+        series.getData().add(new XYChart.Data(categories[1], curWard.getOver30kBelow60k()));
+        series.getData().add(new XYChart.Data(categories[2], curWard.getOver60kBelow100k()));
+        series.getData().add(new XYChart.Data(categories[3], curWard.getOver100kBelow125k()));
+        series.getData().add(new XYChart.Data(categories[4], curWard.getOver125kBelow150k()));
+        series.getData().add(new XYChart.Data(categories[5], curWard.getOver150kBelow200k()));
+        series.getData().add(new XYChart.Data(categories[6], curWard.getOver200kBelow250k()));
+        series.getData().add(new XYChart.Data(categories[7], curWard.getOver250kOrMore()));
+        series.getData().add(new XYChart.Data(categories[8], curWard.getNoResponse()));
+
+        series.setName(tempWard);
+        graphName2.setText(tempWard);
+        barChart2.getData().setAll(series);
+        wardGraphic2.setText(stringBuilder.toString());
+         
     }
     
     /**
-     * graphicReset - resets the census graphic
+     * graphicReset2 - resets the census graphic
      * @param event 
      */
     @FXML
     void graphicReset2(ActionEvent event) {
+        selectWard2.setValue("");
+        graphName2.setText("");
+        barChart2.getData().setAll();
+        wardGraphic2.setText("");
     }
     
     

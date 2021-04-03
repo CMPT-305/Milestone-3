@@ -708,20 +708,6 @@ public class Searcher {
                     wardData.get(entry.getWard()).addToNoResponse(entry.getNoResponse());
                 }
             }
-            
-            
-            for (int i=1;i<13;i++){
-                System.out.println("WARD "+i+" INCOME BY POP");
-                System.out.println(wardData.get("WARD "+i).getLessThan30k());
-                System.out.println(wardData.get("WARD "+i).getLessThan30k());
-                System.out.println(wardData.get("WARD "+i).getOver60kBelow100k());
-                System.out.println(wardData.get("WARD "+i).getOver100kBelow125k());
-                System.out.println(wardData.get("WARD "+i).getOver125kBelow150k());
-                System.out.println(wardData.get("WARD "+i).getOver150kBelow200k());
-                System.out.println(wardData.get("WARD "+i).getOver200kBelow250k());
-                System.out.println(wardData.get("WARD "+i).getOver250kOrMore());
-                System.out.println(wardData.get("WARD "+i).getNoResponse());
-            }
             //System.out.println(wardData.get("WARD 1").getLessThan30k());
         return wardData;
 
