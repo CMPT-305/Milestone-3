@@ -42,9 +42,12 @@ public class CensusData {
         over200kBelow250k = Integer.parseInt(token[9]);
         over250kOrMore = Integer.parseInt(token[10]);
         noResponse = Integer.parseInt(token[11]);
-        
-            }
+    }
     
+    /**
+     * 
+     * @param clone 
+     */
     public CensusData(CensusData clone) {
         ward = clone.ward;
         neighbourhood = clone.neighbourhood;
@@ -158,8 +161,7 @@ public class CensusData {
         return noResponseClone;
     }
     
-    
-     /**
+    /**
      * equalsStreetName - checks input and returns true if it matches
      * ward. Otherwise false
      * @param o
@@ -174,6 +176,4 @@ public class CensusData {
      * @return true/false
      */
     public boolean equalsNeighbourhood(String o) {return neighbourhood.equalsIgnoreCase(o);}
-        
-    
 }

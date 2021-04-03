@@ -30,9 +30,8 @@ public class NewFXMain extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Edmonton Property Assessments");
         initRootLayout();
-        
+        primaryStage.setTitle("Edmonton Property Assessments");
         Scene scene = new Scene(anchorPane);
         primaryStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("/UI/mainUI.css").toExternalForm());
@@ -51,5 +50,4 @@ public class NewFXMain extends Application {
             e.printStackTrace();
         }
     }
-    
 }
