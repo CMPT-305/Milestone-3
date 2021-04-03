@@ -67,15 +67,7 @@ public class Data {
                 try {
                     String url;
                     //Map location url
-                    if (this.getAddress().isBlank()) {
-                        url = String.format("http://maps.google.com/maps?q=%s,%s&z=17",latitude,longitude);
-                    }
-                    else{
-                        String address = houseNumber + " " + streetName;
-                        address = address.replace(" ", "+");
-                        url = String.format("https://www.google.ca/maps/place/%s,+Edmonton,+AB/",address);
-                        System.out.println(url);
-                    }
+                    url = String.format("http://maps.google.com/maps?q=%s,%s&z=17",latitude,longitude);
                     Desktop.getDesktop().browse(new URI(url));
                 } catch (IOException | URISyntaxException e1) {
                     System.out.println("unable to connect");
