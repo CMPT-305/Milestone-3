@@ -13,6 +13,10 @@ import javafx.stage.Stage;
  * @author ryley
  */
 public class NewFXMain extends Application {
+
+    /**
+     *
+     */
     private AnchorPane anchorPane;
 
     /**

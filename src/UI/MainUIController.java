@@ -1,6 +1,5 @@
 package UI;
 
-import Data.CensusData;
 import Data.Data;
 import Data.FilterAccount;
 import Data.FilterAddress;
@@ -12,7 +11,6 @@ import Data.Searcher;
 import Data.Statistics;
 import static Data.Statistics.mean;
 import Data.WardIncome;
-import java.awt.Font;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +27,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Side;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -271,7 +266,7 @@ public class MainUIController implements Initializable {
      * @param event 
      */
     @FXML
-    void graphicSearch2(ActionEvent event) {
+    void CensusGraphicSearch(ActionEvent event) {
         XYChart.Series <String, Number> series = new XYChart.Series();
         StringBuilder stringBuilder = new StringBuilder();
         
@@ -312,7 +307,7 @@ public class MainUIController implements Initializable {
      * @param event 
      */
     @FXML
-    void graphicReset2(ActionEvent event) {
+    void censusGraphicReset(ActionEvent event) {
         selectWard2.setValue("");
         graphName2.setText("");
         barChart2.getData().setAll();

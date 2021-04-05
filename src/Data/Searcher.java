@@ -20,16 +20,17 @@ import java.util.TreeSet;
 public class Searcher {
     private List<Data> data;
     private List<CensusData> censusData;
-    // private String FILENAME = "Test_Data.csv";
     private String FILENAME = "Property_Assessment_Data.csv";
     private String censusFile = "2016_Census_-_Population_by_Household_Income__Neighbourhood_Ward_.csv";
     
     /**
-     * Searcher - takes string filename and creates Data object
-     * @param filename
+     * Takes string filename and creates a list of data objects and censusData objects for each csv file
+     * @param assessmentFileName
+     * @param censusFileName 
      */
-    public Searcher(String filename) {
-        try (Scanner sc = new Scanner(new File(filename))) {
+    public Searcher(String assessmentFileName,String censusFileName) {
+        //Creating the data list
+        try (Scanner sc = new Scanner(new File(assessmentFileName))) {
             data = new ArrayList<>();
             boolean first = true;
             while (sc.hasNextLine()) {
@@ -41,10 +42,10 @@ public class Searcher {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Cannot read data from file: "+filename);
+            System.out.println("Cannot read data from file: "+assessmentFileName);
         }
-        
-        try (Scanner sc = new Scanner(new File(filename))) {
+        //Creating the censusData list
+        try (Scanner sc = new Scanner(new File(censusFileName))) {
             censusData = new ArrayList<>();
             boolean first = true;
             while (sc.hasNextLine()) {
@@ -56,13 +57,13 @@ public class Searcher {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Cannot read data from file: "+filename);
+            System.out.println("Cannot read data from file: "+censusFileName);
         }
     }
     
     /**
      * Searcher - contains the default filename as input and creates the data
-     * list
+     * list and CensusData list using the default filenames
      */
     public Searcher() {
         try (Scanner sc = new Scanner(new File(FILENAME))) {
@@ -686,6 +687,11 @@ public class Searcher {
         return wardData;
     }
     
+    
+        /**
+         * Gets the population by income data for each ward and stores it into a hash map
+         * @return hash map of all wards population by income data
+         */
         public Map<String,WardIncome> getPopulationByWard() {
             List<String> wards = new ArrayList<>();
             Map<String,WardIncome> wardData = new HashMap<>();
@@ -693,7 +699,7 @@ public class Searcher {
                 wards.add("WARD "+i);
                 wardData.put("WARD "+i,new WardIncome());
             }
-            
+
             for (CensusData entry: censusData){
                 if (wardData.containsKey(entry.getWard())) {
                     //wardData.get(entry.getWard()).add(entry;
@@ -711,5 +717,5 @@ public class Searcher {
             //System.out.println(wardData.get("WARD 1").getLessThan30k());
         return wardData;
 
-        }
+            }
 }

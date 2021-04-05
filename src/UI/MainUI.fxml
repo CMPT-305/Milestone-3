@@ -290,8 +290,8 @@
                      </opaqueInsets>
                      <children>
                         <ChoiceBox fx:id="selectWard2" prefHeight="22.0" prefWidth="385.0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-                        <Button fx:id="btnSearchT3" defaultButton="true" mnemonicParsing="false" onAction="#graphicSearch2" prefHeight="22.0" prefWidth="122.0" text="Search" GridPane.rowIndex="4" />
-                        <Button fx:id="btnResetT3" defaultButton="true" mnemonicParsing="false" onAction="#graphicReset2" prefHeight="22.0" prefWidth="193.0" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Button fx:id="btnSearchT3" defaultButton="true" mnemonicParsing="false" onAction="#CensusGraphicSearch" prefHeight="22.0" prefWidth="122.0" text="Search" GridPane.rowIndex="4" />
+                        <Button fx:id="btnResetT3" defaultButton="true" mnemonicParsing="false" onAction="#censusGraphicReset" prefHeight="22.0" prefWidth="193.0" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label prefHeight="17.0" prefWidth="255.0" text="Show Population by Income (Census 2016)" GridPane.columnSpan="4" GridPane.rowIndex="2" />
                         <Label fx:id="graphName2" prefHeight="17.0" prefWidth="624.0" GridPane.columnIndex="3" GridPane.columnSpan="3" />
                         <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="154.0" prefWidth="194.0" GridPane.columnIndex="3" GridPane.columnSpan="8" GridPane.rowIndex="1" GridPane.rowSpan="18">
