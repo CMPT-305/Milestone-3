@@ -61,7 +61,7 @@ public class Data {
             assessmentClass[j] = token[15+j];
         }
         
-        hyperlink = new Hyperlink("Click Me");
+        hyperlink = new Hyperlink("Link");
         //Setting link to Google maps location
         hyperlink.setOnAction(e -> {
             if(Desktop.isDesktopSupported()) {
