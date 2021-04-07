@@ -44,7 +44,10 @@ public class CensusData {
         noResponse = Integer.parseInt(token[11]);
         
             }
-    
+    /**
+     * Clones a census data object
+     * @param clone 
+     */
     public CensusData(CensusData clone) {
         ward = clone.ward;
         neighbourhood = clone.neighbourhood;
@@ -60,7 +63,7 @@ public class CensusData {
     }
 
      /**
-     * 
+     * Gets the ward name of the censusData object
      * @return ward
      */
     public String getWard() {
@@ -69,7 +72,7 @@ public class CensusData {
     }
     
     /**
-     * 
+     * Gets the neighbourhood name of the censusData object
      * @return neighbourhood
      */
     public String getNeighbourhood() {
@@ -79,7 +82,7 @@ public class CensusData {
 
     /**
      * 
-     * @return population making Less than 30k
+     * @return population making Less than 30k for this neighbourhood
      */
     public Integer getLessThan30k() {
         Integer lessThan30kClone = lessThan30k;
@@ -88,7 +91,7 @@ public class CensusData {
 
     /**
      * 
-     * @return population over 30k and below 60k
+     * @return population making over 30k and below 60k for this neighbourhood
      */
     public Integer getOver30kBelow60k() {
         Integer over30kBelow60kClone = over30kBelow60k;
@@ -97,7 +100,7 @@ public class CensusData {
 
     /**
      * 
-     * @return population making over 60k and below 100k
+     * @return population making over 60k and below 100k for this neighbourhood
      */
     public Integer getOver60kBelow100k() {
         Integer over60kBelow100kClone = over60kBelow100k;
@@ -106,7 +109,7 @@ public class CensusData {
 
     /**
      * 
-     * @return population making over 100k and below 125k
+     * @return population making over 100k and below 125k for this neighbourhood
      */
     public Integer getOver100kBelow125k() {
         Integer over100kBelow125kClone = over100kBelow125k;
@@ -115,7 +118,7 @@ public class CensusData {
 
     /**
      * 
-     * @return population making over 125k and below 150k
+     * @return population making over 125k and below 150k for this neighbourhood
      */
     public Integer getOver125kBelow150k() {
         Integer over125kBelow150kClone = over125kBelow150k;
@@ -124,7 +127,7 @@ public class CensusData {
 
     /**
      * 
-     * @return population making over 150k and below 200k
+     * @return population making over 150k and below 200k for this neighbourhood
      */
     public Integer getOver150kBelow200k() {
         Integer over150kBelow200kClone = over150kBelow200k;
@@ -133,7 +136,7 @@ public class CensusData {
 
     /**
      * 
-     * @return population making over 200k and below 250k
+     * @return population making over 200k and below 250k for this neighbourhood
      */
     public Integer getOver200kBelow250k() {
         Integer over200kBelow250kClone = over200kBelow250k;
@@ -142,7 +145,7 @@ public class CensusData {
 
     /**
      * 
-     * @return population making over 250k
+     * @return population making over 250k for this neighbourhood
      */
     public Integer getOver250kOrMore() {
         Integer over250kOrMoreClone = over250kOrMore;
@@ -151,7 +154,7 @@ public class CensusData {
 
     /**
      * 
-     * @return population that didn't respond to the census
+     * @return population that didn't respond to the census for this neighbourhood
      */
     public Integer getNoResponse() {
         Integer noResponseClone = noResponse;

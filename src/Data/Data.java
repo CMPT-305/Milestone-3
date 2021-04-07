@@ -11,6 +11,7 @@ import javafx.scene.control.Hyperlink;
  * @author Ryley and Mario
  */
 public class Data {
+    
     private int accountNumber;
     private String suite;
     private String houseNumber;
@@ -60,16 +61,17 @@ public class Data {
             assessmentClass[j] = token[15+j];
         }
         
-        hyperlink = new Hyperlink("Click Me");
+        hyperlink = new Hyperlink("Link");
         //Setting link to Google maps location
         hyperlink.setOnAction(e -> {
             if(Desktop.isDesktopSupported()) {
                 try {
                     String url;
-                    //Map location url
+                    //Find on google maps by lat and long
                     if (this.getAddress().isBlank()) {
                         url = String.format("http://maps.google.com/maps?q=%s,%s&z=17",latitude,longitude);
                     }
+                    //Find on google maps by address
                     else{
                         String address = houseNumber + " " + streetName;
                         address = address.replace(" ", "+");
@@ -487,12 +489,11 @@ public class Data {
         int value = (int) assessedValue;
         return "$"+String.format("%,2d", value);
     }
-    
+    /**
+     * getHyperlink - returns hyperlink for google maps location
+     * @return hyperlink
+     */
     public Hyperlink getHyperlink() {
         return hyperlink;
-    }
-    
-    public void setButton(Hyperlink hyperlink) {
-        this.hyperlink = hyperlink;
     }
 }
